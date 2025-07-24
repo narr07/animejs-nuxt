@@ -1,3 +1,3 @@
 import { utils } from 'animejs'
 
-export const useUtils = utils
+export { utils as useUtils }

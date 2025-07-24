@@ -1,7 +1,7 @@
 // src/runtime/types.ts
 import type { animate } from 'animejs'
 
-declare module '#app' {
+declare module 'nuxt/app' {
   interface NuxtApp {
     $animate: typeof animate
     $animejs: typeof animate

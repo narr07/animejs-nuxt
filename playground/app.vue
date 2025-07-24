@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useAnimate, useTimeline, useDraggable } from '#anime'
-
 onMounted(() => {
   useAnimate('.box', { x: 250, ease: 'outQuad', loop: true })
 

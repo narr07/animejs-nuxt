@@ -1,15 +1,9 @@
 {
-  "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
     "target": "ES2022",
     "module": "ES2022",
     "moduleResolution": "Bundler",
-    "paths": { "#anime/*": ["./src/runtime/*"] },
-    "types": ["@types/node", "nuxt"]
-  },
-  "exclude": [
-    "dist",
-    "node_modules",
-    "playground"
-  ]
+    "types": ["@types/node", "nuxt"],
+    "paths": { "#anime/*": ["./src/runtime/*"] }
+  }
 }
