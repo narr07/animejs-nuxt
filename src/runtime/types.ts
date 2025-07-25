@@ -5,6 +5,8 @@ export interface AnimeJS {
   animate: (targets: any, params?: AnimationParams) => Animation
   createTimeline: () => Timeline
   stagger: (value: any, options?: StaggerOptions) => any[]
+  onScroll: (target: any, params?: AnimationParams) => Animation
+  createScope: () => { animate: AnimeJS['animate'] }
   utils: {
     get: (targets: any, prop: string) => any
     set: (targets: any, prop: string, value: any) => void
@@ -14,6 +16,9 @@ export interface AnimeJS {
     createMotionPath: (path: string) => any
     morphTo: (path: string) => any
     createDrawable: (path: string) => any
+  }
+  text: {
+    split: (el: any) => any[]
   }
 }
 
