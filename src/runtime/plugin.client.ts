@@ -8,7 +8,6 @@ export default defineNuxtPlugin(async (nuxtApp) => {
       return { animate, createTimeline, stagger, utils, svg }
     }
     catch (error) {
-      console.warn('Failed to load anime.js:', error)
       return null
     }
   }
