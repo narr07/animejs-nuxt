@@ -1,2 +1,7 @@
 // src/runtime/composables/useScope.ts
-export { createScope as useScope } from 'animejs'
+import { useNuxtApp } from 'nuxt/app'
+
+export const useScope = () => {
+  const { $anime } = useNuxtApp()
+  return $anime.createScope()
+}
