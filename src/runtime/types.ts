@@ -61,7 +61,8 @@ export interface StaggerOptions {
   grid?: [number, number]
 }
 
-export type StaggerFunction = (el: any, index: number, total: number) => number
+export type StaggerFunction = (el: any, index: number, total: number) => number | string
+
 
 // ✅ Nuxt plugin types
 declare module '#app' {

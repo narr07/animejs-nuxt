@@ -3,13 +3,15 @@ import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import type { Ref } from 'vue'
 import { useNuxtApp } from 'nuxt/app'
 
+import type { StaggerFunction } from '../types'
+
 export interface UseAnimateOptions {
   x?: number | string | number[] | string[]
   y?: number | string | number[] | string[]
   scale?: number | number[]
   rotate?: number | string | number[]
   duration?: number
-  delay?: number | ((el: any, i: number) => number)
+  delay?: number | string | StaggerFunction
   ease?: string
   loop?: boolean | number
   alternate?: boolean
