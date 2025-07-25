@@ -38,6 +38,97 @@ npx nuxi module add animejs-nuxt
 
 That's it! You can now use anime.js in your Nuxt app ✨
 
+## Usage
+
+All composables are auto-imported when you enable them (the default). Simply
+call them directly in your components.
+
+### `useAnimate`
+
+Animate a single element and get playback controls.
+
+```ts
+const el = ref<HTMLElement | null>(null)
+const { play, pause } = useAnimate(el, { x: [0, 100] })
+```
+
+### `useTimeline`
+
+Create and control an anime.js timeline.
+
+```ts
+const tl = useTimeline({ autoplay: false })
+tl.add(el.value, { scale: [1, 2] })
+tl.play()
+```
+
+### `useScope`
+
+Create a scoped animator instance.
+
+```ts
+const scope = useScope()
+scope.animate(el.value, { y: [0, 50] })
+```
+
+### `useStagger`
+
+Generate staggered values.
+
+```ts
+const offset = useStagger(20)
+$anime.animate(nodes, { x: offset, delay: useStagger(100) })
+```
+
+### `useSvg`
+
+Helpers for SVG animations.
+
+```ts
+const { createMotionPath } = useSvg()
+const path = createMotionPath('#path')
+$anime.animate(dot.value, { translateX: path('x'), translateY: path('y') })
+```
+
+### `useTextSplit`
+
+Split text nodes into characters for animation.
+
+```ts
+const chars = useTextSplit(el.value)
+$anime.animate(chars, { opacity: [0, 1], delay: useStagger(50) })
+```
+
+### `useUtils`
+
+Access anime.js utility helpers.
+
+```ts
+const color = useUtils.random(['#f00', '#0f0', '#00f'])
+```
+
+### `useDraggable`
+
+Make an element draggable.
+
+```ts
+onMounted(() => {
+  if (box.value)
+    useDraggable(box.value)
+})
+```
+
+### `useScroll`
+
+Trigger animations on scroll.
+
+```ts
+onMounted(() => {
+  if (box.value)
+    useScroll(box.value, { y: [0, 200] })
+})
+```
+
 
 ## Contribution
 
