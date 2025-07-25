@@ -12,7 +12,6 @@
     },
   },
   "include": [
-    "src/runtime/types.animejs.d.ts",
     "src"
   ]
 }
