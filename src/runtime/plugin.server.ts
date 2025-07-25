@@ -39,6 +39,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       animate: () => noOpAnimation(),
     }),
     timer: () => noOpAnimation(),
+    createDraggable: () => ({}),
     text: {
       split: () => [],
     },
