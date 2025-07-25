@@ -7,6 +7,7 @@ export interface AnimeJS {
   stagger: (value: any, options?: StaggerOptions) => any[]
   onScroll: (target: any, params?: AnimationParams) => Animation
   createScope: () => { animate: AnimeJS['animate'] }
+  timer: (...args: any[]) => Animation
   utils: {
     get: (targets: any, prop: string) => any
     set: (targets: any, prop: string, value: any) => void
