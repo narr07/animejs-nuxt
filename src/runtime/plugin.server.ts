@@ -20,16 +20,19 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   const serverFallback = {
     animate: () => noOpAnimation(),
-    createTimeline: () => ({
-      add: () => serverFallback,
-      play: () => {},
-      pause: () => {},
-      restart: () => {},
-      seek: () => {},
-      cancel: () => {},
-      revert: () => {},
-      then: (callback?: Function) => Promise.resolve().then(() => callback && callback()),
-    }),
+    createTimeline: () => {
+      const timeline = {
+        add: () => timeline,
+        play: () => {},
+        pause: () => {},
+        restart: () => {},
+        seek: () => {},
+        cancel: () => {},
+        revert: () => {},
+        then: (callback?: Function) => Promise.resolve().then(() => callback && callback()),
+      }
+      return timeline
+    },
     stagger: () => [],
     utils: {
       get: () => null,
