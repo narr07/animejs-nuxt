@@ -2,6 +2,7 @@
 // src/runtime/composables/useAnimate.ts (ENHANCED DEBUG VERSION)
 import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import type { Ref } from 'vue'
+import { useNuxtApp } from 'nuxt/app'
 
 export interface UseAnimateOptions {
   x?: number | string | number[] | string[]
@@ -149,7 +150,7 @@ export function useAnimate(
     }
 
     try {
-      const { animate } = await import('animejs')
+      const { animate } = useNuxtApp().$anime
 
       if (animation.value) {
         cancel()
@@ -291,7 +292,7 @@ export const animateElement = async (
   }
 
   try {
-    const { animate } = await import('animejs')
+    const { animate } = useNuxtApp().$anime
 
     const actualTarget = targets && typeof targets === 'object' && 'value' in targets
       ? targets.value
