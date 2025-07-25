@@ -4,8 +4,8 @@ import { defineNuxtPlugin, useRuntimeConfig } from 'nuxt/app'
 export default defineNuxtPlugin(async (nuxtApp) => {
   const loadAnime = async () => {
     try {
-      const { animate, createTimeline, stagger, utils, svg, onScroll, createScope, text, timer } = await import('animejs')
-      return { animate, createTimeline, stagger, utils, svg, onScroll, createScope, text, timer }
+      const { animate, createTimeline, stagger, utils, svg, onScroll, createScope, text, timer, createDraggable } = await import('animejs')
+      return { animate, createTimeline, stagger, utils, svg, onScroll, createScope, text, timer, createDraggable }
     }
     catch (error) {
       return null
