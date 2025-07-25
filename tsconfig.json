@@ -4,6 +4,11 @@
     "module": "ES2022",
     "moduleResolution": "Bundler",
     "types": ["@types/node", "nuxt"],
-    "paths": { "#anime/*": ["./src/runtime/*"] }
+    "paths": {
+      "#anime/*": ["./src/runtime/*"],
+      "#app": [
+      "./.nuxt/dist/app"
+      ]
+    },
   }
 }
