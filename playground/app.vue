@@ -9,6 +9,7 @@
     <UseUtils />
     <UseDraggable />
     <UseScroll />
+    <UseTimer />
   </div>
 </template>
 
@@ -22,6 +23,7 @@ import UseText from '~/components/UseText.vue'
 import UseUtils from '~/components/UseUtils.vue'
 import UseDraggable from '~/components/UseDraggable.vue'
 import UseScroll from '~/components/UseScroll.vue'
+import UseTimer from '~/components/UseTimer.vue'
 </script>
 
 <style>
