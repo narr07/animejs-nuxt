@@ -38,6 +38,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     createScope: () => ({
       animate: () => noOpAnimation(),
     }),
+    timer: () => noOpAnimation(),
     text: {
       split: () => [],
     },
