@@ -19,6 +19,5 @@ export default defineNuxtPlugin(async (nuxtApp) => {
   // ✅ Sekarang config sudah ter-set dengan benar dari module
   if (anime && config.public.animejs?.provide) {
     nuxtApp.provide('anime', anime)
-    nuxtApp.vueApp.config.globalProperties.$anime = anime
   }
 })
