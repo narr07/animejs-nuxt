@@ -49,6 +49,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   if (nuxtApp.$config.public.animejs?.provide) {
     // ✅ Provide server fallback
     nuxtApp.provide('anime', serverFallback)
-    nuxtApp.vueApp.config.globalProperties.$anime = serverFallback
   }
 })
