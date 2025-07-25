@@ -6,18 +6,6 @@ afterEach(() => {
   vi.restoreAllMocks()
 })
 
-describe('useTimer', () => {
-  it('calls $anime.timer with provided arguments', async () => {
-    const timer = vi.fn()
-    vi.mock('nuxt/app', () => ({
-      useNuxtApp: () => ({ $anime: { timer } })
-    }))
-    const { useTimer } = await import('../src/runtime/composables/useTimer')
-    const result = useTimer('a', 1)
-    expect(timer).toHaveBeenCalledWith('a', 1)
-    expect(result).toBe(timer.mock.results[0].value)
-  })
-})
 
 describe('useDraggable', () => {
   it('re-exports createDraggable from animejs', async () => {
@@ -63,7 +51,7 @@ describe('SSR fallback', () => {
     expect(() => plugin(nuxtApp as any)).not.toThrow()
     const fallback = provide.mock.calls[0][1]
     vi.mock('nuxt/app', () => ({ useNuxtApp: () => ({ $anime: fallback }) }))
-    const { useTimer } = await import('../src/runtime/composables/useTimer')
-    expect(() => useTimer()).not.toThrow()
+    const { useScroll } = await import('../src/runtime/composables/useScroll')
+    expect(() => useScroll('el')).not.toThrow()
   })
 })

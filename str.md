@@ -14,7 +14,6 @@ animejs-nuxt/
  │        ├─ useStagger.ts
  │        ├─ useSvg.ts
  │        ├─ useText.ts
- │        ├─ useTimer.ts
  │        └─ useUtils.ts
  ├─ playground/               # app demo Nuxt
  ├─ package.json

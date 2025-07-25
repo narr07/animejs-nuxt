@@ -26,7 +26,7 @@ anime.js in your components without extra setup.
 
 * Zero configuration – just install and start animating
 * Works with both client-side and server-side rendering
-* Useful composables like `useAnimate`, `useTimeline`, and `useTimer`
+* Useful composables like `useAnimate` and `useTimeline`
 
 ## Quick Setup
 
