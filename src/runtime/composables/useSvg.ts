@@ -1,3 +1,7 @@
-import { svg } from 'animejs'
+import { useNuxtApp } from '#imports'
 
-export const { createMotionPath, createDrawable, morphTo } = svg
+const svg = () => useNuxtApp().$anime.svg
+
+export const createMotionPath = (...args: any[]) => svg().createMotionPath(...args)
+export const createDrawable = (...args: any[]) => svg().createDrawable(...args)
+export const morphTo = (...args: any[]) => svg().morphTo(...args)

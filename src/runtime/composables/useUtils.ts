@@ -1,3 +1,3 @@
-import { utils } from 'animejs'
+import { useNuxtApp } from '#imports'
 
-export { utils as useUtils }
+export const useUtils = () => useNuxtApp().$anime.utils
