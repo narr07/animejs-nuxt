@@ -7,8 +7,12 @@
     "paths": {
       "#anime/*": ["./src/runtime/*"],
       "#app": [
-      "./.nuxt/dist/app"
+        "./.nuxt/dist/app"
       ]
     },
-  }
+  },
+  "include": [
+    "src/runtime/types.animejs.d.ts",
+    "src"
+  ]
 }
