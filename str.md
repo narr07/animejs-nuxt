@@ -2,8 +2,8 @@ animejs-nuxt/
  ├─ src/
  │  ├─ module.ts              # definisi Nuxt module
  │  └─ runtime/
- │     ├─ plugin.client.ts    # plugin client-side untuk load anime.js
- │     ├─ plugin.server.ts    # plugin server-side fallback
+ │     ├─ plugin.client.ts    # loads anime.js only on the client
+ │     ├─ plugin.server.ts    # SSR-safe fallback plugin
  │     ├─ types.ts            # augmentasi tipe
  │     └─ composables/
  │        ├─ useAnimate.ts
