@@ -61,8 +61,8 @@ export interface StaggerOptions {
   grid?: [number, number]
 }
 
-// Re-export the anime.js type to avoid mismatched signatures
 export type StaggerFunction = (el: any, index: number, total: number) => number | string
+
 
 // ✅ Nuxt plugin types
 declare module '#app' {
