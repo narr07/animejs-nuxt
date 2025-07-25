@@ -30,6 +30,12 @@ export default defineNuxtPlugin((nuxtApp) => {
       revert: () => {},
       then: (callback?: Function) => Promise.resolve().then(() => callback && callback()),
     }),
+    createDraggable: () => ({
+      on: () => {},
+      destroy: () => {},
+    }),
+    onScroll: () => {},
+    createScope: () => ({}),
     stagger: () => [],
     utils: {
       get: () => null,
@@ -40,6 +46,9 @@ export default defineNuxtPlugin((nuxtApp) => {
       createMotionPath: () => ({}),
       morphTo: () => ({}),
       createDrawable: () => ({}),
+    },
+    text: {
+      split: () => [],
     },
   }
 

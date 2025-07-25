@@ -4,6 +4,9 @@
 export interface AnimeJS {
   animate: (targets: any, params?: AnimationParams) => Animation
   createTimeline: () => Timeline
+  createDraggable: (...args: any[]) => any
+  onScroll: (...args: any[]) => any
+  createScope: (...args: any[]) => any
   stagger: (value: any, options?: StaggerOptions) => any[]
   utils: {
     get: (targets: any, prop: string) => any
@@ -14,6 +17,9 @@ export interface AnimeJS {
     createMotionPath: (path: string) => any
     morphTo: (path: string) => any
     createDrawable: (path: string) => any
+  }
+  text: {
+    split: (...args: any[]) => any
   }
 }
 

@@ -1,3 +1,5 @@
-import { text } from 'animejs'
+import { useNuxtApp } from '#imports'
 
-export const useTextSplit = text.split
+export const useTextSplit = (...args: any[]) => {
+  return useNuxtApp().$anime.text.split(...args)
+}
