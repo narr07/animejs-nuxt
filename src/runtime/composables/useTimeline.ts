@@ -1,3 +1,5 @@
-import { createTimeline, type TimelineParams } from 'animejs'
+import { useNuxtApp } from '#imports'
 
-export const useTimeline = (params?: TimelineParams) => createTimeline(params)
+export const useTimeline = (params?: any) => {
+  return useNuxtApp().$anime.createTimeline(params)
+}
