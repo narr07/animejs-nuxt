@@ -14,7 +14,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     const { animate } = await import('animejs')
 
     nuxtApp.provide('animate', animate)
-    nuxtApp.provide('animejs', animate)
+    nuxtApp.vueApp.config.globalProperties.$anime = animate
   }
   catch (error) {
     console.warn('Failed to load Anime.js:', error)
