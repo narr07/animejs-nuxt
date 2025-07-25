@@ -4,7 +4,7 @@
 export interface AnimeJS {
   animate: (targets: any, params?: AnimationParams) => Animation
   createTimeline: () => Timeline
-  stagger: (value: any, options?: StaggerOptions) => any[]
+  stagger: (value: any, options?: StaggerOptions) => StaggerFunction
   onScroll: (target: any, params?: AnimationParams) => Animation
   createScope: () => { animate: AnimeJS['animate'] }
   createDraggable: (...args: any[]) => any
@@ -26,7 +26,7 @@ export interface AnimeJS {
 // ✅ anime.js v4 parameter types
 export interface AnimationParams {
   duration?: number
-  delay?: number
+  delay?: number | string | StaggerFunction
   ease?: string | Function
   loop?: number | boolean
   alternate?: boolean
@@ -60,6 +60,9 @@ export interface StaggerOptions {
   reversed?: boolean
   grid?: [number, number]
 }
+
+// Re-export the anime.js type to avoid mismatched signatures
+export type StaggerFunction = (el: any, index: number, total: number) => number | string
 
 // ✅ Nuxt plugin types
 declare module '#app' {

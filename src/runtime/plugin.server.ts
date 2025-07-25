@@ -33,7 +33,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       }
       return timeline
     },
-    stagger: () => [],
+    stagger: () => () => 0,
     onScroll: () => noOpAnimation(),
     createScope: () => ({
       animate: () => noOpAnimation(),
