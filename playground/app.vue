@@ -15,6 +15,7 @@
       <UseText />
       <UseUtils />
       <UseDraggable />
+      <ScrollTest />
       <UseScroll />
       <ModuleFeatureExample />
     </div>
