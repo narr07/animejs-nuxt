@@ -20,16 +20,16 @@
     </div>
     <div class="flex space-x-4">
       <button
-        @click="run"
         class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition"
         aria-label="Run scope animation 1"
+        @click="run"
       >
         Run Scope
       </button>
       <button
-        @click="run2"
         class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
         aria-label="Run scope animation 2"
+        @click="run2"
       >
         Run Scope 2
       </button>
@@ -38,8 +38,6 @@
 </template>
 
 <script setup lang="ts">
-
-
 const box = ref<HTMLElement | null>(null)
 const scope = useScope()
 const box2 = ref<HTMLElement | null>(null)

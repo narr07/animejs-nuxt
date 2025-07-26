@@ -16,7 +16,7 @@ export interface UseScrollReturn {
   isInView: Ref<boolean>
   container: Ref<Element | null>
   target: Ref<Element | null>
-  
+
   // ScrollObserver Methods
   revert: () => void
   refresh: () => void
@@ -89,14 +89,14 @@ export function useScroll(
       target: options.target,
       repeat: options.repeat,
       debug: options.debug,
-      
+
       // Thresholds
       enter: options.enter,
       leave: options.leave,
-      
+
       // Synchronisation
       sync: options.sync,
-      
+
       // Callbacks
       onEnter: (obs: ScrollObserver) => {
         updateReactiveValues()
@@ -135,7 +135,8 @@ export function useScroll(
     try {
       observer.value = onScroll(actualTarget, scrollParams)
       updateReactiveValues()
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Failed to create scroll observer:', error)
     }
   }
@@ -177,13 +178,12 @@ export const createScrollObserver = (targets: any, params?: ScrollParams): Scrol
   if (typeof window === 'undefined') {
     return null
   }
-  
+
   const nuxtApp = useNuxtApp()
   if (!nuxtApp.$anime || typeof nuxtApp.$anime !== 'object' || !('onScroll' in nuxtApp.$anime)) {
     console.warn('onScroll not available')
     return null
   }
-  
+
   return (nuxtApp.$anime as { onScroll: (targets: any, params?: ScrollParams) => ScrollObserver }).onScroll(targets, params)
 }
-

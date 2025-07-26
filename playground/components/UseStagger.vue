@@ -1,26 +1,58 @@
 <template>
   <div class="stagger-demo">
     <div class="demo-header">
-      <h2 class="demo-title">Stagger Animation Demo</h2>
+      <h2 class="demo-title">
+        Stagger Animation Demo
+      </h2>
       <p class="demo-description">
         Animate elements with staggered delays and effects.
       </p>
     </div>
 
-    <div ref="wrap" class="wrap">
-      <div v-for="n in 5" :key="n" class="box">{{ n }}</div>
+    <div
+      ref="wrap"
+      class="wrap"
+    >
+      <div
+        v-for="n in 5"
+        :key="n"
+        class="box"
+      >
+        {{ n }}
+      </div>
     </div>
-    <div ref="wrap2" class="wrap">
-      <div v-for="n in 3" :key="`b-${n}`" class="box">B{{ n }}</div>
+    <div
+      ref="wrap2"
+      class="wrap"
+    >
+      <div
+        v-for="n in 3"
+        :key="`b-${n}`"
+        class="box"
+      >
+        B{{ n }}
+      </div>
     </div>
 
     <div class="button-group">
-      <button @click="run" class="btn">Stagger Effect 1</button>
-      <button @click="run2" class="btn">Stagger Effect 2</button>
+      <button
+        class="btn"
+        @click="run"
+      >
+        Stagger Effect 1
+      </button>
+      <button
+        class="btn"
+        @click="run2"
+      >
+        Stagger Effect 2
+      </button>
     </div>
 
     <div class="code-example">
-      <h3 class="section-title">Usage Example</h3>
+      <h3 class="section-title">
+        Usage Example
+      </h3>
       <pre><code>import { useStagger } from '~/runtime/composables/useStagger'
 
 const offset = useStagger(20)
@@ -31,7 +63,6 @@ $anime.animate(elements, { x: offset, delay: useStagger(100) })</code></pre>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-
 
 const wrap = ref<HTMLElement | null>(null)
 const wrap2 = ref<HTMLElement | null>(null)

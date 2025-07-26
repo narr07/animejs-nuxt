@@ -45,7 +45,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     remove: () => noOpTimeline(),
     sync: () => noOpTimeline(),
     init: () => noOpTimeline(),
-    
+
     // Properties
     children: [],
   })
@@ -57,7 +57,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     revert: () => noOpScope(),
     refresh: () => noOpScope(),
     keepTime: () => noOpScope(),
-    
+
     // Properties
     root: null,
     defaults: {},
@@ -68,7 +68,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     revert: () => noOpScrollObserver(),
     refresh: () => noOpScrollObserver(),
     link: () => noOpScrollObserver(),
-    
+
     // Properties
     progress: 0,
     isInView: false,
@@ -88,7 +88,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     setY: () => noOpDraggable(),
     animateInView: () => noOpDraggable(),
     scrollInView: () => noOpDraggable(),
-    
+
     // Properties
     x: 0,
     y: 0,
@@ -100,7 +100,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     // Methods
     revert: () => noOpTextSplitter(),
     refresh: () => noOpTextSplitter(),
-    
+
     // Properties
     chars: [],
     words: [],
@@ -121,7 +121,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     seek: () => noOpTimer(),
     stretch: () => noOpTimer(),
     alternate: () => noOpTimer(),
-    
+
     // Properties
     duration: 0,
     currentTime: 0,
@@ -130,7 +130,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     began: false,
     paused: false,
     completed: false,
-    
+
     // Promise Support
     then: (callback?: Function) => Promise.resolve().then(() => callback && callback()),
   })
@@ -138,11 +138,11 @@ export default defineNuxtPlugin((nuxtApp) => {
   const noOpAnimatable = () => ({
     // Methods
     revert: () => noOpAnimatable(),
-    
+
     // Getters/Setters
     get: () => null,
     set: () => noOpAnimatable(),
-    
+
     // Properties
     target: null,
     duration: 0,
@@ -152,27 +152,27 @@ export default defineNuxtPlugin((nuxtApp) => {
   const serverFallback = {
     // Core Animation
     animate: () => noOpAnimation(),
-    
+
     // Timeline
     createTimeline: () => noOpTimeline(),
-    
+
     // Stagger
     stagger: () => () => 0,
-    
+
     // Scope
     createScope: () => noOpScope(),
-    
+
     // Scroll
     onScroll: () => noOpScrollObserver(),
-    
+
     // Draggable
     createDraggable: () => noOpDraggable(),
-    
+
     // Text
     text: {
       split: () => noOpTextSplitter(),
     },
-    
+
     // SVG
     svg: {
       createMotionPath: () => ({
@@ -187,7 +187,7 @@ export default defineNuxtPlugin((nuxtApp) => {
         length: 0,
       }),
     },
-    
+
     // Utils
     utils: {
       // DOM Utils
@@ -195,7 +195,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       set: () => {},
       remove: () => {},
       cleanInlineStyles: () => {},
-      
+
       // Math Utils
       random: (min = 0, max = 1) => min + Math.random() * (max - min),
       randomPick: (array: any[]) => array[Math.floor(Math.random() * array.length)],
@@ -205,19 +205,19 @@ export default defineNuxtPlugin((nuxtApp) => {
       roundPad: (value: number, precision: number) => value.toFixed(precision),
       snap: (value: number, increment: number) => Math.round(value / increment) * increment,
       wrap: (value: number, min: number, max: number) => ((value - min) % (max - min) + (max - min)) % (max - min) + min,
-      mapRange: (value: number, inMin: number, inMax: number, outMin: number, outMax: number) => 
+      mapRange: (value: number, inMin: number, inMax: number, outMin: number, outMax: number) =>
         (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin,
       interpolate: (start: any, end: any, progress: number) => start,
-      
+
       // String Utils
       padStart: (str: string, length: number, char = ' ') => str.padStart(length, char),
       padEnd: (str: string, length: number, char = ' ') => str.padEnd(length, char),
       shuffle: (array: any[]) => [...array].sort(() => Math.random() - 0.5),
-      
+
       // Conversion Utils
       degToRad: (degrees: number) => degrees * Math.PI / 180,
       radToDeg: (radians: number) => radians * 180 / Math.PI,
-      
+
       // Advanced Utils
       sync: (callback: Function) => callback(),
       createTimekeeper: () => ({
@@ -229,42 +229,42 @@ export default defineNuxtPlugin((nuxtApp) => {
       }),
       $: () => null,
     },
-    
+
     // Timer
     createTimer: () => noOpTimer(),
-    
+
     // Engine
     engine: {
       // Methods
       update: () => {},
       pause: () => {},
       resume: () => {},
-      
+
       // Parameters
       fps: 60,
       precision: 0.01,
       timeUnit: 'ms' as const,
       pauseOnDocumentHidden: true,
       speed: 1,
-      
+
       // Properties
       isRunning: false,
       currentTime: 0,
     },
-    
+
     // Animatable
     animatable: () => noOpAnimatable(),
   }
 
   if (
-    nuxtApp.$config &&
-    nuxtApp.$config.public &&
-    typeof nuxtApp.$config.public === 'object' &&
-    'animejs' in nuxtApp.$config.public &&
-    nuxtApp.$config.public.animejs &&
-    typeof nuxtApp.$config.public.animejs === 'object' &&
-    'provide' in nuxtApp.$config.public.animejs &&
-    nuxtApp.$config.public.animejs.provide
+    nuxtApp.$config
+    && nuxtApp.$config.public
+    && typeof nuxtApp.$config.public === 'object'
+    && 'animejs' in nuxtApp.$config.public
+    && nuxtApp.$config.public.animejs
+    && typeof nuxtApp.$config.public.animejs === 'object'
+    && 'provide' in nuxtApp.$config.public.animejs
+    && nuxtApp.$config.public.animejs.provide
   ) {
     // ✅ Provide comprehensive server fallback
     nuxtApp.provide('anime', serverFallback)

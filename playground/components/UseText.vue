@@ -1,22 +1,46 @@
 <template>
   <div class="text-demo">
     <div class="demo-header">
-      <h2 class="demo-title">Animated Text Split</h2>
+      <h2 class="demo-title">
+        Animated Text Split
+      </h2>
       <p class="demo-description">
         Animate text by splitting into characters with staggered effects.
       </p>
     </div>
 
-    <p ref="text" class="demo-text">Anime.js Text Split Example</p>
-    <p ref="text2" class="demo-text">Another Split Example</p>
+    <p
+      ref="text"
+      class="demo-text"
+    >
+      Anime.js Text Split Example
+    </p>
+    <p
+      ref="text2"
+      class="demo-text"
+    >
+      Another Split Example
+    </p>
 
     <div class="button-group">
-      <button @click="animate" class="btn">Animate Style 1</button>
-      <button @click="animate2" class="btn">Animate Style 2</button>
+      <button
+        class="btn"
+        @click="animate"
+      >
+        Animate Style 1
+      </button>
+      <button
+        class="btn"
+        @click="animate2"
+      >
+        Animate Style 2
+      </button>
     </div>
 
     <div class="code-example">
-      <h3 class="section-title">Usage Example</h3>
+      <h3 class="section-title">
+        Usage Example
+      </h3>
       <pre><code>import { useTextSplit } from '~/runtime/composables/useText'
 import { useStagger } from '~/runtime/composables/useStagger'
 
@@ -28,8 +52,6 @@ $anime.animate(chars, { y: [20, 0], opacity: [0, 1], delay: useStagger(30) })</c
 </template>
 
 <script setup lang="ts">
-
-
 const text = ref<HTMLElement | null>(null)
 const text2 = ref<HTMLElement | null>(null)
 const { $anime } = useNuxtApp()

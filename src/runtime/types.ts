@@ -5,37 +5,37 @@
 export interface AnimeJS {
   // Core Animation
   animate: (targets: any, params?: AnimationParams) => Animation
-  
+
   // Timeline
   createTimeline: (params?: TimelineParams) => Timeline
-  
+
   // Stagger
   stagger: (value: number | [number, number], options?: StaggerOptions) => StaggerFunction
-  
+
   // Scope
   createScope: (params?: ScopeParams) => Scope
-  
+
   // Scroll
   onScroll: (targets: any, params?: ScrollParams) => ScrollObserver
-  
+
   // Draggable
   createDraggable: (targets: any, params?: DraggableParams) => Draggable
-  
+
   // Text
   text: TextHelpers
-  
+
   // SVG
   svg: SVGHelpers
-  
+
   // Utils
   utils: Utils
-  
+
   // Timer
   createTimer: (params?: TimerParams) => Timer
-  
+
   // Engine
   engine: Engine
-  
+
   // Animatable
   animatable: (targets: any, params?: AnimatableParams) => Animatable
 }
@@ -44,7 +44,7 @@ export interface AnimeJS {
 export interface AnimationParams {
   // Targets
   targets?: any
-  
+
   // Tween Parameters
   duration?: number | ((el: any, i: number, total: number) => number)
   delay?: number | string | StaggerFunction | ((el: any, i: number, total: number) => number)
@@ -53,7 +53,7 @@ export interface AnimationParams {
   to?: number | string | ((el: any, i: number, total: number) => number | string)
   modifier?: (value: any) => any
   composition?: 'none' | 'replace' | 'blend'
-  
+
   // Animatable Properties
   x?: number | string | number[] | string[] | ((el: any, i: number, total: number) => number | string)
   y?: number | string | number[] | string[] | ((el: any, i: number, total: number) => number | string)
@@ -72,14 +72,14 @@ export interface AnimationParams {
   translateX?: number | string | number[] | string[] | ((el: any, i: number, total: number) => number | string)
   translateY?: number | string | number[] | string[] | ((el: any, i: number, total: number) => number | string)
   translateZ?: number | string | number[] | string[] | ((el: any, i: number, total: number) => number | string)
-  
+
   // CSS Properties
   opacity?: number | number[] | ((el: any, i: number, total: number) => number)
   backgroundColor?: string | string[] | ((el: any, i: number, total: number) => string)
   color?: string | string[] | ((el: any, i: number, total: number) => string)
   width?: number | string | (number | string)[] | ((el: any, i: number, total: number) => number | string)
   height?: number | string | (number | string)[] | ((el: any, i: number, total: number) => number | string)
-  
+
   // Playback Settings
   autoplay?: boolean
   loop?: boolean | number
@@ -89,7 +89,7 @@ export interface AnimationParams {
   playbackRate?: number
   playbackEase?: string
   playbackLoopDelay?: number
-  
+
   // Callbacks
   onBegin?: (animation: Animation) => void
   onUpdate?: (animation: Animation) => void
@@ -99,10 +99,10 @@ export interface AnimationParams {
   onRender?: (animation: Animation) => void
   onBeforeUpdate?: (animation: Animation) => void
   then?: (callback?: Function) => Promise<any>
-  
+
   // Keyframes
   keyframes?: AnimationParams[]
-  
+
   // Individual Property Parameters
   [key: string]: any
 }
@@ -121,7 +121,7 @@ export interface Animation {
   stretch: (factor: number) => Animation
   alternate: () => Animation
   refresh: () => Animation
-  
+
   // Properties
   duration: number
   currentTime: number
@@ -131,7 +131,7 @@ export interface Animation {
   paused: boolean
   completed: boolean
   finished: Promise<void>
-  
+
   // Promise Support
   then: (callback?: Function) => Promise<any>
 }
@@ -149,7 +149,7 @@ export interface TimelineParams {
   playbackEase?: string
   playbackLoopDelay?: number
   defaults?: AnimationParams
-  
+
   // Callbacks
   onBegin?: (timeline: Timeline) => void
   onUpdate?: (timeline: Timeline) => void
@@ -169,7 +169,7 @@ export interface Timeline extends Animation {
   remove: (targets: any) => Timeline
   sync: (timeline: Timeline) => Timeline
   init: () => Timeline
-  
+
   // Properties
   children: Animation[]
 }
@@ -203,7 +203,7 @@ export interface Scope {
   revert: (targets?: any) => Scope
   refresh: () => Scope
   keepTime: (value: boolean) => Scope
-  
+
   // Properties
   root: Element
   defaults: AnimationParams
@@ -217,11 +217,11 @@ export interface ScrollParams {
   target?: Element | string
   repeat?: boolean
   debug?: boolean
-  
+
   // Thresholds
   enter?: number | string
   leave?: number | string
-  
+
   // Callbacks
   onEnter?: (observer: ScrollObserver) => void
   onLeave?: (observer: ScrollObserver) => void
@@ -231,7 +231,7 @@ export interface ScrollParams {
   onLeaveBackward?: (observer: ScrollObserver) => void
   onUpdate?: (observer: ScrollObserver) => void
   onSyncComplete?: (observer: ScrollObserver) => void
-  
+
   // Synchronisation
   sync?: 'smooth' | 'eased' | 'progress'
 }
@@ -241,7 +241,7 @@ export interface ScrollObserver {
   revert: () => ScrollObserver
   refresh: () => ScrollObserver
   link: (animation: Animation) => ScrollObserver
-  
+
   // Properties
   progress: number
   isInView: boolean
@@ -255,7 +255,7 @@ export interface DraggableParams {
   container?: Element | string
   trigger?: Element | string
   cursor?: string
-  
+
   // Physics
   dragSpeed?: number
   releaseEase?: string
@@ -265,20 +265,20 @@ export interface DraggableParams {
   containerFriction?: number
   releaseContainerFriction?: number
   containerPadding?: number
-  
+
   // Velocity
   minVelocity?: number
   maxVelocity?: number
   velocityMultiplier?: number
-  
+
   // Scroll
   scrollSpeed?: number
   scrollThreshold?: number
-  
+
   // Axes
   x?: DraggableAxisParams
   y?: DraggableAxisParams
-  
+
   // Callbacks
   onGrab?: (draggable: Draggable) => void
   onDrag?: (draggable: Draggable) => void
@@ -308,7 +308,7 @@ export interface Draggable {
   setY: (value: number) => Draggable
   animateInView: () => Draggable
   scrollInView: () => Draggable
-  
+
   // Properties
   x: number
   y: number
@@ -334,7 +334,7 @@ export interface TextSplitter {
   // Methods
   revert: () => TextSplitter
   refresh: () => TextSplitter
-  
+
   // Properties
   chars: Element[]
   words: Element[]
@@ -387,7 +387,7 @@ export interface Utils {
   set: (targets: any, property: string, value: any) => void
   remove: (targets: any, property: string) => void
   cleanInlineStyles: (targets: any) => void
-  
+
   // Math Utils
   random: (min?: number, max?: number) => number
   randomPick: <T>(array: T[]) => T
@@ -399,16 +399,16 @@ export interface Utils {
   wrap: (value: number, min: number, max: number) => number
   mapRange: (value: number, inMin: number, inMax: number, outMin: number, outMax: number) => number
   interpolate: (start: any, end: any, progress: number) => any
-  
+
   // String Utils
   padStart: (str: string, length: number, char?: string) => string
   padEnd: (str: string, length: number, char?: string) => string
   shuffle: <T>(array: T[]) => T[]
-  
+
   // Conversion Utils
   degToRad: (degrees: number) => number
   radToDeg: (radians: number) => number
-  
+
   // Advanced Utils
   sync: (callback: Function) => void
   createTimekeeper: (params?: TimekeeperParams) => Timekeeper
@@ -439,7 +439,7 @@ export interface TimerParams {
   framerate?: number
   playbackRate?: number
   playbackLoopDelay?: number
-  
+
   // Callbacks
   onBegin?: (timer: Timer) => void
   onUpdate?: (timer: Timer) => void
@@ -462,7 +462,7 @@ export interface Timer {
   seek: (time: number) => Timer
   stretch: (factor: number) => Timer
   alternate: () => Timer
-  
+
   // Properties
   duration: number
   currentTime: number
@@ -471,7 +471,7 @@ export interface Timer {
   began: boolean
   paused: boolean
   completed: boolean
-  
+
   // Promise Support
   then: (callback?: Function) => Promise<any>
 }
@@ -482,14 +482,14 @@ export interface Engine {
   update: () => void
   pause: () => void
   resume: () => void
-  
+
   // Parameters
   fps: number
   precision: number
   timeUnit: 'ms' | 's'
   pauseOnDocumentHidden: boolean
   speed: number
-  
+
   // Properties
   isRunning: boolean
   currentTime: number
@@ -506,11 +506,11 @@ export interface AnimatableParams {
 export interface Animatable {
   // Methods
   revert: () => Animatable
-  
+
   // Getters/Setters
   get: (property: string) => any
   set: (property: string, value: any) => Animatable
-  
+
   // Properties
   target: any
   duration: number

@@ -82,7 +82,8 @@ export function useWAAPI(target: any, options: UseWAAPIOptions = {}): UseWAAPIRe
       effect.value = animation.value.effect as KeyframeEffect || null
       timeline.value = animation.value.timeline || null
       playState.value = animation.value.playState || null
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Failed to create WAAPI animation:', error)
     }
   }
@@ -109,4 +110,3 @@ export function useWAAPI(target: any, options: UseWAAPIOptions = {}): UseWAAPIRe
     updatePlaybackRate,
   }
 }
-

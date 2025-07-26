@@ -21,8 +21,6 @@
   </div>
 </template>
 
-
-
 <style>
 .playground {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

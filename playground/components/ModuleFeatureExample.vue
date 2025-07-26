@@ -1,14 +1,21 @@
 <template>
   <div class="module-feature-demo p-6 max-w-4xl mx-auto bg-white rounded-lg shadow-md space-y-8">
     <header class="text-center">
-      <h1 class="text-4xl font-bold text-gray-900 mb-2">Module Feature Demo</h1>
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">
+        Module Feature Demo
+      </h1>
       <p class="text-gray-600 max-w-2xl mx-auto">
         This example demonstrates combined usage of animation, draggable, and timeline composables from the module.
       </p>
     </header>
 
-    <section aria-label="Animation and Draggable demo" class="space-y-4">
-      <h2 class="text-2xl font-semibold text-gray-800">Animation & Draggable</h2>
+    <section
+      aria-label="Animation and Draggable demo"
+      class="space-y-4"
+    >
+      <h2 class="text-2xl font-semibold text-gray-800">
+        Animation & Draggable
+      </h2>
       <div
         ref="animatedDraggableBox"
         class="w-32 h-32 bg-blue-600 text-white flex items-center justify-center rounded-lg shadow-lg cursor-grab select-none"
@@ -20,31 +27,36 @@
       </div>
       <div class="flex space-x-4">
         <button
-          @click="playAnimation"
           class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
           aria-label="Play animation"
+          @click="playAnimation"
         >
           Play Animation
         </button>
         <button
-          @click="pauseAnimation"
           class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition"
           aria-label="Pause animation"
+          @click="pauseAnimation"
         >
           Pause Animation
         </button>
         <button
-          @click="restartAnimation"
           class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
           aria-label="Restart animation"
+          @click="restartAnimation"
         >
           Restart Animation
         </button>
       </div>
     </section>
 
-    <section aria-label="Timeline demo" class="space-y-4">
-      <h2 class="text-2xl font-semibold text-gray-800">Timeline Control</h2>
+    <section
+      aria-label="Timeline demo"
+      class="space-y-4"
+    >
+      <h2 class="text-2xl font-semibold text-gray-800">
+        Timeline Control
+      </h2>
       <div
         ref="timelineBox"
         class="w-24 h-24 bg-purple-600 text-white flex items-center justify-center rounded-lg shadow-lg"
@@ -55,31 +67,36 @@
       </div>
       <div class="flex space-x-4">
         <button
-          @click="playTimeline"
           class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition"
           aria-label="Play timeline"
+          @click="playTimeline"
         >
           Play Timeline
         </button>
         <button
-          @click="pauseTimeline"
           class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition"
           aria-label="Pause timeline"
+          @click="pauseTimeline"
         >
           Pause Timeline
         </button>
         <button
-          @click="restartTimeline"
           class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
           aria-label="Restart timeline"
+          @click="restartTimeline"
         >
           Restart Timeline
         </button>
       </div>
     </section>
 
-    <section aria-label="Usage code examples" class="bg-gray-900 text-gray-100 rounded-lg p-6 overflow-x-auto font-mono text-sm">
-      <h2 class="text-xl font-semibold mb-4">Usage Examples</h2>
+    <section
+      aria-label="Usage code examples"
+      class="bg-gray-900 text-gray-100 rounded-lg p-6 overflow-x-auto font-mono text-sm"
+    >
+      <h2 class="text-xl font-semibold mb-4">
+        Usage Examples
+      </h2>
       <pre><code>
 // Animation & Draggable setup
 const animatedDraggableBox = ref(null)
@@ -123,8 +140,6 @@ function restartTimeline() {
 </template>
 
 <script setup lang="ts">
-
-
 const animatedDraggableBox = ref<HTMLElement | null>(null)
 const timelineBox = ref<HTMLElement | null>(null)
 

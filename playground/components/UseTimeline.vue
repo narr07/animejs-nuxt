@@ -1,9 +1,23 @@
 <template>
   <div>
-    <div ref="box" class="box">Timeline</div>
-    <div ref="box2" class="box">Timeline 2</div>
-    <button @click="start">Start</button>
-    <button @click="start2">Start 2</button>
+    <div
+      ref="box"
+      class="box"
+    >
+      Timeline
+    </div>
+    <div
+      ref="box2"
+      class="box"
+    >
+      Timeline 2
+    </div>
+    <button @click="start">
+      Start
+    </button>
+    <button @click="start2">
+      Start 2
+    </button>
   </div>
 </template>
 

@@ -1,7 +1,17 @@
 <template>
   <div style="height: 150vh;">
-    <div ref="box" class="box">Scroll</div>
-    <div ref="box2" class="box">Scroll 2</div>
+    <div
+      ref="box"
+      class="box"
+    >
+      Scroll
+    </div>
+    <div
+      ref="box2"
+      class="box"
+    >
+      Scroll 2
+    </div>
   </div>
 </template>
 

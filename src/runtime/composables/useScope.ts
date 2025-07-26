@@ -14,7 +14,7 @@ export interface UseScopeReturn {
   scope: Ref<Scope | null>
   root: Ref<Element | null>
   defaults: Ref<AnimationParams>
-  
+
   // Scope Methods
   animate: (targets: any, params?: AnimationParams) => Animation | null
   add: (targets: any, params?: AnimationParams) => void
@@ -36,7 +36,8 @@ export function useScope(
     if (scope.value?.animate) {
       try {
         return scope.value.animate(targets, params)
-      } catch (error) {
+      }
+      catch (error) {
         console.error('Failed to animate in scope:', error)
         return null
       }
@@ -103,7 +104,8 @@ export function useScope(
     try {
       scope.value = createScope(scopeParams)
       updateReactiveValues()
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Failed to create scope:', error)
     }
   }
@@ -137,12 +139,12 @@ export const createScopeInstance = (params?: ScopeParams) => {
   if (typeof window === 'undefined') {
     return null
   }
-  
+
   const nuxtApp = useNuxtApp()
   if (!nuxtApp.$anime || typeof nuxtApp.$anime !== 'object' || !('createScope' in nuxtApp.$anime)) {
     console.warn('createScope not available')
     return null
   }
-  
+
   return (nuxtApp.$anime as { createScope: Function }).createScope(params)
 }

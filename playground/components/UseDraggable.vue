@@ -1,14 +1,18 @@
 <template>
   <div class="draggable-demo p-6 max-w-3xl mx-auto bg-white rounded-lg shadow-md">
     <header class="text-center mb-8">
-      <h2 class="text-3xl font-bold text-gray-800 mb-2">Draggable Elements</h2>
+      <h2 class="text-3xl font-bold text-gray-800 mb-2">
+        Draggable Elements
+      </h2>
       <p class="text-gray-600 text-base max-w-xl mx-auto">
         Interactive draggable elements with constraints and physics. Try dragging the boxes below!
       </p>
     </header>
 
     <section class="mb-8">
-      <h3 class="text-xl font-semibold text-gray-700 mb-4">Basic Draggable</h3>
+      <h3 class="text-xl font-semibold text-gray-700 mb-4">
+        Basic Draggable
+      </h3>
       <div class="flex gap-4 p-4 bg-gray-100 rounded-lg min-h-[120px] items-start">
         <div
           ref="box1"
@@ -32,7 +36,9 @@
     </section>
 
     <section class="mb-8">
-      <h3 class="text-xl font-semibold text-gray-700 mb-4">Constrained Draggable</h3>
+      <h3 class="text-xl font-semibold text-gray-700 mb-4">
+        Constrained Draggable
+      </h3>
       <div
         ref="constraintContainer"
         class="constraint-container border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-100 w-[300px] h-[150px] relative"
@@ -51,7 +57,9 @@
     </section>
 
     <section class="mb-8">
-      <h3 class="text-xl font-semibold text-gray-700 mb-4">Physics Draggable</h3>
+      <h3 class="text-xl font-semibold text-gray-700 mb-4">
+        Physics Draggable
+      </h3>
       <div class="flex gap-4 p-4 bg-gray-100 rounded-lg min-h-[120px] items-start">
         <div
           ref="physicsBox"
@@ -66,7 +74,9 @@
     </section>
 
     <section>
-      <h3 class="text-xl font-semibold text-gray-700 mb-4">Usage Examples</h3>
+      <h3 class="text-xl font-semibold text-gray-700 mb-4">
+        Usage Examples
+      </h3>
       <pre
         class="bg-gray-900 text-gray-100 rounded-lg p-6 overflow-x-auto font-mono text-sm"
         tabindex="0"
@@ -99,8 +109,6 @@ useDraggable(element.value, {
 </template>
 
 <script setup lang="ts">
-
-
 const box1 = ref<HTMLElement | null>(null)
 const box2 = ref<HTMLElement | null>(null)
 const constrainedBox = ref<HTMLElement | null>(null)
@@ -125,7 +133,7 @@ onMounted(() => {
         x: { min: 0, max: 250 },
         y: { min: 0, max: 100 },
         container: constraintContainer.value,
-      }
+      },
     )
     if (!constrainedDraggable) console.error('Constrained draggable initialization failed.')
   }

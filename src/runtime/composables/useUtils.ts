@@ -9,13 +9,13 @@ export function useUtils(): Utils | null {
   if (typeof window === 'undefined') {
     return null
   }
-  
+
   const nuxtApp = useNuxtApp()
   if (!nuxtApp.$anime || typeof nuxtApp.$anime !== 'object' || !('utils' in nuxtApp.$anime)) {
     console.warn('utils not available')
     return null
   }
-  
+
   return (nuxtApp.$anime as { utils: Utils }).utils
 }
 
@@ -108,8 +108,8 @@ export function useWrap() {
 export function useMapRange() {
   return (value: number, inMin: number, inMax: number, outMin: number, outMax: number) => {
     const utils = useUtils()
-    return utils?.mapRange(value, inMin, inMax, outMin, outMax) || 
-           (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin
+    return utils?.mapRange(value, inMin, inMax, outMin, outMax)
+      || (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin
   }
 }
 
@@ -163,7 +163,8 @@ export function useSync() {
     const utils = useUtils()
     if (utils?.sync) {
       utils.sync(callback)
-    } else {
+    }
+    else {
       callback()
     }
   }
@@ -175,7 +176,7 @@ export function useCreateTimekeeper() {
     if (utils?.createTimekeeper) {
       return utils.createTimekeeper(params)
     }
-    
+
     // Fallback implementation
     return {
       time: 0,
@@ -193,13 +194,13 @@ export function useDollarSign() {
     if (utils?.$) {
       return utils.$(selector)
     }
-    
+
     // Fallback implementation
     if (typeof window !== 'undefined') {
       const elements = document.querySelectorAll(selector)
       return elements.length === 1 ? elements[0] : Array.from(elements)
     }
-    
+
     return null
   }
 }

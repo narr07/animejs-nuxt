@@ -56,7 +56,8 @@ export function useAnimatable(target: any, options: UseAnimatableOptions = {}): 
       animatable.value = (nuxtApp.$anime as any).animatable(targetRef.value, options)
       duration.value = animatable.value.duration || options.duration || 0
       ease.value = animatable.value.ease || options.ease || ''
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Failed to create animatable:', error)
     }
   }

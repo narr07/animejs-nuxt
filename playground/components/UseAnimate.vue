@@ -18,23 +18,23 @@
     </div>
     <div class="flex space-x-4">
       <button
-        @click="play"
         class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
         aria-label="Play animations"
+        @click="play"
       >
         Play
       </button>
       <button
-        @click="pause"
         class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition"
         aria-label="Pause animations"
+        @click="pause"
       >
         Pause
       </button>
       <button
-        @click="restart"
         class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
         aria-label="Restart animations"
+        @click="restart"
       >
         Restart
       </button>
@@ -43,8 +43,6 @@
 </template>
 
 <script setup lang="ts">
-
-
 const box = ref<HTMLElement | null>(null)
 const controls = useAnimate(box, {
   x: [0, 200, 0],

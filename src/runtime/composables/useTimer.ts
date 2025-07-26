@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ref, onMounted, onUnmounted } from 'vue'
 import type { Ref } from 'vue'
 import { useNuxtApp } from 'nuxt/app'
@@ -17,7 +16,7 @@ export interface UseTimerReturn {
   progress: Ref<number>
   currentTime: Ref<number>
   duration: Ref<number>
-  
+
   // Control Methods
   play: () => void
   pause: () => void
@@ -165,7 +164,7 @@ export function useTimer(
       framerate: options.framerate,
       playbackRate: options.playbackRate,
       playbackLoopDelay: options.playbackLoopDelay,
-      
+
       // Callbacks
       onBegin: (tmr: Timer) => {
         isPlaying.value = true
@@ -200,7 +199,8 @@ export function useTimer(
     try {
       timer.value = createTimer(timerParams)
       updateReactiveValues()
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Failed to create timer:', error)
     }
   }
@@ -237,4 +237,3 @@ export function useTimer(
     alternate,
   }
 }
-

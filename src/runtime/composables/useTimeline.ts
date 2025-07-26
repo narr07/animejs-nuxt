@@ -18,7 +18,7 @@ export interface UseTimelineReturn {
   currentTime: Ref<number>
   duration: Ref<number>
   children: Ref<Animation[]>
-  
+
   // Control Methods
   play: () => void
   pause: () => void
@@ -32,7 +32,7 @@ export interface UseTimelineReturn {
   stretch: (factor: number) => void
   alternate: () => void
   refresh: () => void
-  
+
   // Timeline Methods
   add: (targets: any, params?: AnimationParams, position?: number | string) => void
   set: (targets: any, params: AnimationParams, position?: number | string) => void
@@ -230,7 +230,7 @@ export function useTimeline(
       playbackEase: options.playbackEase,
       playbackLoopDelay: options.playbackLoopDelay,
       defaults: options.defaults,
-      
+
       // Callbacks
       onBegin: (tl: Timeline) => {
         isPlaying.value = true
@@ -272,7 +272,8 @@ export function useTimeline(
     try {
       timeline.value = createTimeline(timelineParams)
       updateReactiveValues()
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Failed to create timeline:', error)
     }
   }
@@ -324,13 +325,12 @@ export const createTimelineInstance = (params?: TimelineParams): Timeline | null
   if (typeof window === 'undefined') {
     return null
   }
-  
+
   const nuxtApp = useNuxtApp()
   if (!nuxtApp.$anime || typeof nuxtApp.$anime !== 'object' || !('createTimeline' in nuxtApp.$anime)) {
     console.warn('createTimeline not available')
     return null
   }
-  
+
   return (nuxtApp.$anime as { createTimeline: Function }).createTimeline(params)
 }
-

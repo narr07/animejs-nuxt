@@ -1,9 +1,23 @@
 <template>
   <div>
-    <div ref="box" class="box">Utils</div>
-    <div ref="box2" class="box">Utils 2</div>
-    <button @click="randomize">Random Color</button>
-    <button @click="randomize2">Random Color 2</button>
+    <div
+      ref="box"
+      class="box"
+    >
+      Utils
+    </div>
+    <div
+      ref="box2"
+      class="box"
+    >
+      Utils 2
+    </div>
+    <button @click="randomize">
+      Random Color
+    </button>
+    <button @click="randomize2">
+      Random Color 2
+    </button>
   </div>
 </template>
 

@@ -17,7 +17,7 @@ export interface UseAnimateReturn {
   progress: Ref<number>
   currentTime: Ref<number>
   duration: Ref<number | ((el: any, i: number, total: number) => number)>
-  
+
   // Control Methods
   play: () => void
   pause: () => void
@@ -183,7 +183,7 @@ export function useAnimate(
       playbackRate: options.playbackRate,
       playbackEase: options.playbackEase,
       playbackLoopDelay: options.playbackLoopDelay,
-      
+
       // Transform properties
       ...(options.x !== undefined && { x: options.x }),
       ...(options.y !== undefined && { y: options.y }),
@@ -202,23 +202,23 @@ export function useAnimate(
       ...(options.translateX !== undefined && { translateX: options.translateX }),
       ...(options.translateY !== undefined && { translateY: options.translateY }),
       ...(options.translateZ !== undefined && { translateZ: options.translateZ }),
-      
+
       // CSS properties
       ...(options.opacity !== undefined && { opacity: options.opacity }),
       ...(options.backgroundColor !== undefined && { backgroundColor: options.backgroundColor }),
       ...(options.color !== undefined && { color: options.color }),
       ...(options.width !== undefined && { width: options.width }),
       ...(options.height !== undefined && { height: options.height }),
-      
+
       // Tween parameters
       ...(options.from !== undefined && { from: options.from }),
       ...(options.to !== undefined && { to: options.to }),
       ...(options.modifier !== undefined && { modifier: options.modifier }),
       ...(options.composition !== undefined && { composition: options.composition }),
-      
+
       // Keyframes
       ...(options.keyframes !== undefined && { keyframes: options.keyframes }),
-      
+
       // Callbacks
       onBegin: (anim: Animation) => {
         isPlaying.value = true
@@ -255,20 +255,21 @@ export function useAnimate(
       onBeforeUpdate: (anim: Animation) => {
         if (options.onBeforeUpdate) options.onBeforeUpdate(anim)
       },
-      
+
       // Add any additional properties
       ...Object.keys(options).reduce((acc, key) => {
         if (!['autoCleanup', 'onBegin', 'onUpdate', 'onComplete', 'onLoop', 'onPause', 'onRender', 'onBeforeUpdate'].includes(key)) {
           acc[key] = options[key as keyof UseAnimateOptions]
         }
         return acc
-      }, {} as any)
+      }, {} as any),
     }
 
     try {
       animation.value = animate(actualTarget, animationParams)
       updateReactiveValues()
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Failed to create animation:', error)
     }
   }
@@ -353,7 +354,8 @@ export const animateElement = (
       if (animation && typeof animation.then === 'function') {
         animation.then(() => resolve(animation))
       }
-    } catch (error) {
+    }
+    catch (error) {
       reject(error)
     }
   })

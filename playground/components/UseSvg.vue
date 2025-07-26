@@ -1,30 +1,72 @@
 <template>
   <div class="svg-demo">
     <div class="demo-header">
-      <h2 class="demo-title">SVG Motion Path Animation</h2>
+      <h2 class="demo-title">
+        SVG Motion Path Animation
+      </h2>
       <p class="demo-description">
         Animate elements along SVG paths with staggered timing and rotation.
       </p>
     </div>
 
     <div class="svg-container">
-      <svg width="200" height="100" viewBox="0 0 200 100" class="svg-canvas">
-        <path id="p" d="M10 80 Q 95 10 180 80" fill="transparent" stroke="#555" />
-        <circle ref="dot" r="5" fill="#e74c3c" />
+      <svg
+        width="200"
+        height="100"
+        viewBox="0 0 200 100"
+        class="svg-canvas"
+      >
+        <path
+          id="p"
+          d="M10 80 Q 95 10 180 80"
+          fill="transparent"
+          stroke="#555"
+        />
+        <circle
+          ref="dot"
+          r="5"
+          fill="#e74c3c"
+        />
       </svg>
-      <svg width="200" height="100" viewBox="0 0 200 100" class="svg-canvas">
-        <path id="p2" d="M10 20 Q 95 90 180 20" fill="transparent" stroke="#555" />
-        <circle ref="dot2" r="5" fill="#2ecc71" />
+      <svg
+        width="200"
+        height="100"
+        viewBox="0 0 200 100"
+        class="svg-canvas"
+      >
+        <path
+          id="p2"
+          d="M10 20 Q 95 90 180 20"
+          fill="transparent"
+          stroke="#555"
+        />
+        <circle
+          ref="dot2"
+          r="5"
+          fill="#2ecc71"
+        />
       </svg>
     </div>
 
     <div class="button-group">
-      <button @click="animatePath" class="btn">Animate Path 1</button>
-      <button @click="animatePath2" class="btn">Animate Path 2</button>
+      <button
+        class="btn"
+        @click="animatePath"
+      >
+        Animate Path 1
+      </button>
+      <button
+        class="btn"
+        @click="animatePath2"
+      >
+        Animate Path 2
+      </button>
     </div>
 
     <div class="code-example">
-      <h3 class="section-title">Usage Example</h3>
+      <h3 class="section-title">
+        Usage Example
+      </h3>
       <pre><code>import { createMotionPath } from '~/runtime/composables/useSvg'
 
 const pathFunc = createMotionPath('#p')
@@ -34,8 +76,6 @@ $anime.animate(element, { translateX: pathFunc('x'), translateY: pathFunc('y'), 
 </template>
 
 <script setup lang="ts">
-
-
 const dot = ref<SVGCircleElement | null>(null)
 const dot2 = ref<SVGCircleElement | null>(null)
 const { $anime } = useNuxtApp()
