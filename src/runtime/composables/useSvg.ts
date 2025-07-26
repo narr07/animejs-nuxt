@@ -113,7 +113,7 @@ export function useSvgDraw(
     ease?: string
     direction?: 'forward' | 'reverse'
   }
-): { draw: () => void, erase: () => void } {
+): { draw: () => void; erase: () => void } {
   const { $anime } = useNuxtApp()
   
   const draw = () => {
@@ -163,3 +163,4 @@ export function useSvgDraw(
   
   return { draw, erase }
 }
+

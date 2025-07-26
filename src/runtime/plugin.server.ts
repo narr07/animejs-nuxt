@@ -256,7 +256,16 @@ export default defineNuxtPlugin((nuxtApp) => {
     animatable: () => noOpAnimatable(),
   }
 
-  if (nuxtApp.$config.public.animejs?.provide) {
+  if (
+    nuxtApp.$config &&
+    nuxtApp.$config.public &&
+    typeof nuxtApp.$config.public === 'object' &&
+    'animejs' in nuxtApp.$config.public &&
+    nuxtApp.$config.public.animejs &&
+    typeof nuxtApp.$config.public.animejs === 'object' &&
+    'provide' in nuxtApp.$config.public.animejs &&
+    nuxtApp.$config.public.animejs.provide
+  ) {
     // ✅ Provide comprehensive server fallback
     nuxtApp.provide('anime', serverFallback)
   }

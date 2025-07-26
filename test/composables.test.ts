@@ -6,7 +6,6 @@ afterEach(() => {
   vi.restoreAllMocks()
 })
 
-
 describe('useDraggable', () => {
   it('re-exports createDraggable from animejs', async () => {
     const { createDraggable } = await import('animejs')

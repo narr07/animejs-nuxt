@@ -1,3 +1,4 @@
+// src/runtime/composables/useUtils.ts
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useNuxtApp } from 'nuxt/app'
 
@@ -10,12 +11,12 @@ export function useUtils(): Utils | null {
   }
   
   const nuxtApp = useNuxtApp()
-  if (!nuxtApp.$anime?.utils) {
+  if (!nuxtApp.$anime || typeof nuxtApp.$anime !== 'object' || !('utils' in nuxtApp.$anime)) {
     console.warn('utils not available')
     return null
   }
   
-  return nuxtApp.$anime.utils
+  return (nuxtApp.$anime as { utils: Utils }).utils
 }
 
 // Individual utility functions as composables

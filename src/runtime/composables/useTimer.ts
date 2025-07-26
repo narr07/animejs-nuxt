@@ -121,7 +121,7 @@ export function useTimer(
   const stretch = (factor: number) => {
     if (timer.value?.stretch) {
       timer.value.stretch(factor)
-      duration.value = (options.duration || 1000) * factor
+      duration.value = (typeof options.duration === 'number' ? options.duration : 1000) * factor
     }
   }
 
@@ -147,12 +147,12 @@ export function useTimer(
       return
 
     const nuxtApp = useNuxtApp()
-    if (!nuxtApp.$anime?.createTimer) {
+    if (!nuxtApp.$anime || typeof nuxtApp.$anime !== 'object' || !('createTimer' in nuxtApp.$anime)) {
       console.warn('createTimer not available in this Anime.js version')
       return
     }
 
-    const { createTimer } = nuxtApp.$anime
+    const { createTimer } = nuxtApp.$anime as { createTimer: Function }
 
     // Create timer with all supported parameters
     const timerParams: TimerParams = {
@@ -237,3 +237,4 @@ export function useTimer(
     alternate,
   }
 }
+

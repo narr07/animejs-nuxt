@@ -26,8 +26,8 @@ export function useTextSplit(target: HTMLElement | string, params?: TextSplitPar
 export function useTextSplitWithAnimation(
   target: HTMLElement | string,
   animationType: 'fadeIn' | 'slideUp' | 'slideDown' | 'scale' | 'rotate' = 'fadeIn',
-  params?: TextSplitParams & { staggerDelay?: number, duration?: number }
-): { splitter: TextSplitter | null, animate: () => void } {
+  params?: TextSplitParams & { staggerDelay?: number; duration?: number }
+): { splitter: TextSplitter | null; animate: () => void } {
   const splitter = useTextSplit(target, params)
   const { $anime } = useNuxtApp()
   
@@ -115,3 +115,4 @@ export function useTextTypewriter(
   
   return { start, stop, reset }
 }
+

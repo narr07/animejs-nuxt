@@ -43,10 +43,10 @@ export function useDraggableWithConstraints(
     ...options,
     container: containerEl,
     x: constraints?.x ? {
-      snap: (value: number) => Math.max(constraints.x!.min || -Infinity, Math.min(constraints.x!.max || Infinity, value))
+      snap: (value: number) => Math.max(constraints.x!.min ?? -Infinity, Math.min(constraints.x!.max ?? Infinity, value))
     } : undefined,
     y: constraints?.y ? {
-      snap: (value: number) => Math.max(constraints.y!.min || -Infinity, Math.min(constraints.y!.max || Infinity, value))
+      snap: (value: number) => Math.max(constraints.y!.min ?? -Infinity, Math.min(constraints.y!.max ?? Infinity, value))
     } : undefined
   }
   

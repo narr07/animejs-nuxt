@@ -16,7 +16,7 @@ export interface UseAnimateReturn {
   isPaused: Ref<boolean>
   progress: Ref<number>
   currentTime: Ref<number>
-  duration: Ref<number>
+  duration: Ref<number | ((el: any, i: number, total: number) => number)>
   
   // Control Methods
   play: () => void
@@ -123,7 +123,7 @@ export function useAnimate(
   const stretch = (factor: number) => {
     if (animation.value?.stretch) {
       animation.value.stretch(factor)
-      duration.value = (options.duration || 1000) * factor
+      duration.value = (typeof options.duration === 'number' ? options.duration : 1000) * factor
     }
   }
 
@@ -155,12 +155,12 @@ export function useAnimate(
       return
 
     const nuxtApp = useNuxtApp()
-    if (!nuxtApp.$anime?.animate) {
+    if (!nuxtApp.$anime || typeof nuxtApp.$anime !== 'object' || !('animate' in nuxtApp.$anime)) {
       console.warn('Anime.js not available')
       return
     }
 
-    const { animate } = nuxtApp.$anime
+    const { animate } = nuxtApp.$anime as { animate: Function }
     const actualTarget = targets && typeof targets === 'object' && 'value' in targets
       ? targets.value
       : targets
@@ -194,7 +194,7 @@ export function useAnimate(
       ...(options.scaleZ !== undefined && { scaleZ: options.scaleZ }),
       ...(options.rotate !== undefined && { rotate: options.rotate }),
       ...(options.rotateX !== undefined && { rotateX: options.rotateX }),
-      ...(options.rotateY !== undefined && { rotateY: options.rotateY }),
+      ...(options.rotateY !== undefined && { rotate: options.rotateY }),
       ...(options.rotateZ !== undefined && { rotateZ: options.rotateZ }),
       ...(options.skew !== undefined && { skew: options.skew }),
       ...(options.skewX !== undefined && { skewX: options.skewX }),
@@ -318,7 +318,7 @@ export function useAnimate(
 }
 
 // Enhanced animateElement function
-export const animateElement = async (
+export const animateElement = (
   targets: any,
   options: UseAnimateOptions = {},
 ): Promise<Animation> => {
@@ -327,12 +327,12 @@ export const animateElement = async (
   }
 
   const nuxtApp = useNuxtApp()
-  if (!nuxtApp.$anime?.animate) {
+  if (!nuxtApp.$anime || typeof nuxtApp.$anime !== 'object' || !('animate' in nuxtApp.$anime)) {
     console.warn('Anime.js not available')
     return Promise.resolve({} as Animation)
   }
 
-  const { animate } = nuxtApp.$anime
+  const { animate } = nuxtApp.$anime as { animate: Function }
   const actualTarget = targets && typeof targets === 'object' && 'value' in targets
     ? targets.value
     : targets
@@ -350,7 +350,7 @@ export const animateElement = async (
       })
 
       // Fallback resolve in case onComplete doesn't fire
-      if (animation?.then) {
+      if (animation && typeof animation.then === 'function') {
         animation.then(() => resolve(animation))
       }
     } catch (error) {

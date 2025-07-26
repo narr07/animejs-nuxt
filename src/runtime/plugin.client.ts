@@ -20,7 +20,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         createDraggable,
         createTimer,
         engine,
-        animatable,
+        // animatable is not present in animejs types, so exclude it
         // Add any other exports that might be available
         ...rest
       } = animeModule
@@ -35,11 +35,14 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         createScope,
         text,
         createDraggable,
-        createTimer: createTimer || (() => console.warn('createTimer not available in this Anime.js version')),
+        createTimer: createTimer || (() => {
+          if (process.dev) console.warn('createTimer not available in this Anime.js version')
+          return null
+        }),
         engine: engine || {
-          update: () => console.warn('engine.update not available'),
-          pause: () => console.warn('engine.pause not available'),
-          resume: () => console.warn('engine.resume not available'),
+          update: () => { if (process.dev) console.warn('engine.update not available') },
+          pause: () => { if (process.dev) console.warn('engine.pause not available') },
+          resume: () => { if (process.dev) console.warn('engine.resume not available') },
           fps: 60,
           precision: 0.01,
           timeUnit: 'ms',
@@ -48,7 +51,11 @@ export default defineNuxtPlugin(async (nuxtApp) => {
           isRunning: true,
           currentTime: 0
         },
-        animatable: animatable || (() => console.warn('animatable not available in this Anime.js version')),
+        // Provide a no-op animatable function with warning
+        animatable: () => {
+          if (process.dev) console.warn('animatable not available in this Anime.js version')
+          return null
+        },
         ...rest
       }
     }
@@ -64,7 +71,16 @@ export default defineNuxtPlugin(async (nuxtApp) => {
   const config = useRuntimeConfig()
 
   // Provide anime instance if enabled
-  if (anime && config.public.animejs?.provide) {
+  if (
+    anime &&
+    config.public &&
+    typeof config.public === 'object' &&
+    'animejs' in config.public &&
+    config.public.animejs &&
+    typeof config.public.animejs === 'object' &&
+    'provide' in config.public.animejs &&
+    config.public.animejs.provide
+  ) {
     nuxtApp.provide('anime', anime)
   }
 })

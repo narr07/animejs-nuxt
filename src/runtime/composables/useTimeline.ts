@@ -211,12 +211,12 @@ export function useTimeline(
       return
 
     const nuxtApp = useNuxtApp()
-    if (!nuxtApp.$anime?.createTimeline) {
+    if (!nuxtApp.$anime || typeof nuxtApp.$anime !== 'object' || !('createTimeline' in nuxtApp.$anime)) {
       console.warn('createTimeline not available')
       return
     }
 
-    const { createTimeline } = nuxtApp.$anime
+    const { createTimeline } = nuxtApp.$anime as { createTimeline: Function }
 
     // Create timeline with all supported parameters
     const timelineParams: TimelineParams = {
@@ -320,16 +320,17 @@ export function useTimeline(
 }
 
 // Simple timeline creation function (backward compatibility)
-export const createTimelineInstance = (params?: TimelineParams) => {
+export const createTimelineInstance = (params?: TimelineParams): Timeline | null => {
   if (typeof window === 'undefined') {
     return null
   }
   
   const nuxtApp = useNuxtApp()
-  if (!nuxtApp.$anime?.createTimeline) {
+  if (!nuxtApp.$anime || typeof nuxtApp.$anime !== 'object' || !('createTimeline' in nuxtApp.$anime)) {
     console.warn('createTimeline not available')
     return null
   }
   
-  return nuxtApp.$anime.createTimeline(params)
+  return (nuxtApp.$anime as { createTimeline: Function }).createTimeline(params)
 }
+

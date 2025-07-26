@@ -1,3 +1,4 @@
+// src/runtime/composables/useScroll.ts
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 import type { Ref } from 'vue'
@@ -65,12 +66,12 @@ export function useScroll(
       return
 
     const nuxtApp = useNuxtApp()
-    if (!nuxtApp.$anime?.onScroll) {
+    if (!nuxtApp.$anime || typeof nuxtApp.$anime !== 'object' || !('onScroll' in nuxtApp.$anime)) {
       console.warn('onScroll not available')
       return
     }
 
-    const { onScroll } = nuxtApp.$anime
+    const { onScroll } = nuxtApp.$anime as { onScroll: Function }
     const actualTarget = targets && typeof targets === 'object' && 'value' in targets
       ? targets.value
       : targets
@@ -172,16 +173,17 @@ export function useScroll(
 }
 
 // Simple scroll observer creation function (backward compatibility)
-export const createScrollObserver = (targets: any, params?: ScrollParams) => {
+export const createScrollObserver = (targets: any, params?: ScrollParams): ScrollObserver | null => {
   if (typeof window === 'undefined') {
     return null
   }
   
   const nuxtApp = useNuxtApp()
-  if (!nuxtApp.$anime?.onScroll) {
+  if (!nuxtApp.$anime || typeof nuxtApp.$anime !== 'object' || !('onScroll' in nuxtApp.$anime)) {
     console.warn('onScroll not available')
     return null
   }
   
-  return nuxtApp.$anime.onScroll(targets, params)
+  return (nuxtApp.$anime as { onScroll: (targets: any, params?: ScrollParams) => ScrollObserver }).onScroll(targets, params)
 }
+

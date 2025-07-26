@@ -86,12 +86,12 @@ export function useScope(
       return
 
     const nuxtApp = useNuxtApp()
-    if (!nuxtApp.$anime?.createScope) {
+    if (!nuxtApp.$anime || typeof nuxtApp.$anime !== 'object' || !('createScope' in nuxtApp.$anime)) {
       console.warn('createScope not available')
       return
     }
 
-    const { createScope } = nuxtApp.$anime
+    const { createScope } = nuxtApp.$anime as { createScope: Function }
 
     // Create scope with all supported parameters
     const scopeParams: ScopeParams = {
@@ -139,10 +139,10 @@ export const createScopeInstance = (params?: ScopeParams) => {
   }
   
   const nuxtApp = useNuxtApp()
-  if (!nuxtApp.$anime?.createScope) {
+  if (!nuxtApp.$anime || typeof nuxtApp.$anime !== 'object' || !('createScope' in nuxtApp.$anime)) {
     console.warn('createScope not available')
     return null
   }
   
-  return nuxtApp.$anime.createScope(params)
+  return (nuxtApp.$anime as { createScope: Function }).createScope(params)
 }
