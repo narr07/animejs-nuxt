@@ -1,30 +1,50 @@
 <template>
-  <div>
+  <div class="animate-demo p-6 max-w-md mx-auto bg-white rounded-lg shadow-md">
     <div
       ref="box"
-      class="box"
+      class="box mb-4"
+      aria-label="Simple animation box"
+      role="region"
     >
-      Animasi Sederhana
+      Simple Animation
     </div>
     <div
       ref="box2"
-      class="box"
+      class="box mb-6"
+      aria-label="Rotate animation box"
+      role="region"
     >
       Rotate
     </div>
-    <button @click="play">
-      Play
-    </button>
-    <button @click="pause">
-      Pause
-    </button>
-    <button @click="restart">
-      Restart
-    </button>
+    <div class="flex space-x-4">
+      <button
+        @click="play"
+        class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+        aria-label="Play animations"
+      >
+        Play
+      </button>
+      <button
+        @click="pause"
+        class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition"
+        aria-label="Pause animations"
+      >
+        Pause
+      </button>
+      <button
+        @click="restart"
+        class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
+        aria-label="Restart animations"
+      >
+        Restart
+      </button>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+
+
 const box = ref<HTMLElement | null>(null)
 const controls = useAnimate(box, {
   x: [0, 200, 0],
@@ -42,16 +62,16 @@ const controls2 = useAnimate(box2, {
 })
 
 const play = () => {
-  controls.play()
-  controls2.play()
+  if (controls) controls.play()
+  if (controls2) controls2.play()
 }
 const pause = () => {
-  controls.pause()
-  controls2.pause()
+  if (controls) controls.pause()
+  if (controls2) controls2.pause()
 }
 const restart = () => {
-  controls.restart()
-  controls2.restart()
+  if (controls) controls.restart()
+  if (controls2) controls2.restart()
 }
 </script>
 
@@ -67,5 +87,8 @@ const restart = () => {
   border-radius: 8px;
   margin-bottom: 1rem;
   transition: box-shadow 0.2s;
+  user-select: none;
+  cursor: default;
+  box-shadow: 0 4px 8px rgba(52, 152, 219, 0.5);
 }
 </style>

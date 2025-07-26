@@ -34,9 +34,7 @@ $anime.animate(element, { translateX: pathFunc('x'), translateY: pathFunc('y'), 
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { createMotionPath } from '~/runtime/composables/useSvg'
-import { useNuxtApp } from 'nuxt/app'
+
 
 const dot = ref<SVGCircleElement | null>(null)
 const dot2 = ref<SVGCircleElement | null>(null)

@@ -28,10 +28,7 @@ $anime.animate(chars, { y: [20, 0], opacity: [0, 1], delay: useStagger(30) })</c
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useTextSplit } from '~/runtime/composables/useText'
-import { useStagger } from '~/runtime/composables/useStagger'
-import { useNuxtApp } from 'nuxt/app'
+
 
 const text = ref<HTMLElement | null>(null)
 const text2 = ref<HTMLElement | null>(null)

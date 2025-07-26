@@ -31,8 +31,7 @@ $anime.animate(elements, { x: offset, delay: useStagger(100) })</code></pre>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useStagger } from '~/runtime/composables/useStagger'
-import { useNuxtApp } from 'nuxt/app'
+
 
 const wrap = ref<HTMLElement | null>(null)
 const wrap2 = ref<HTMLElement | null>(null)
