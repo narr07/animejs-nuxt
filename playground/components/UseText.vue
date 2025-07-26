@@ -45,8 +45,8 @@
 import { useStagger } from '~/runtime/composables/useStagger'
 
 const text = ref()
-const chars = useTextSplit(text.value)
-$anime.animate(chars, { y: [20, 0], opacity: [0, 1], delay: useStagger(30) })</code></pre>
+const splitter = useTextSplit(text.value, { type: 'chars' })
+$anime.animate(splitter.chars, { y: [20, 0], opacity: [0, 1], delay: useStagger(30) })</code></pre>
     </div>
   </div>
 </template>
@@ -58,17 +58,17 @@ const { $anime } = useNuxtApp()
 
 const animate = () => {
   if (!text.value) return
-  const chars = useTextSplit(text.value)
-  if (chars) {
-    $anime.animate(chars, { y: [20, 0], opacity: [0, 1], delay: useStagger(30) })
+  const splitter = useTextSplit(text.value, { type: 'chars' })
+  if (splitter) {
+    $anime.animate(splitter.chars, { y: [20, 0], opacity: [0, 1], delay: useStagger(30) })
   }
 }
 
 const animate2 = () => {
   if (!text2.value) return
-  const chars = useTextSplit(text2.value)
-  if (chars) {
-    $anime.animate(chars, { y: [-20, 0], opacity: [0, 1], delay: useStagger(40) })
+  const splitter = useTextSplit(text2.value, { type: 'words' })
+  if (splitter) {
+    $anime.animate(splitter.words, { y: [-20, 0], opacity: [0, 1], delay: useStagger(40) })
   }
 }
 </script>
