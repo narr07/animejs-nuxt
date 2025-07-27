@@ -19,141 +19,189 @@ export function useUtils(): Utils | null {
   return (nuxtApp.$anime as { utils: Utils }).utils
 }
 
+function getUtils() {
+  const utils = useUtils()
+  if (utils) return utils
+
+  // Fallback utils implementation
+  return {
+    get: () => null,
+    set: () => {},
+    remove: () => {},
+    cleanInlineStyles: () => {},
+    random: (min: number | any[] = 0, max = 1) => {
+      if (Array.isArray(min)) {
+        return min[Math.floor(Math.random() * min.length)]
+      }
+      return Math.random() * (max - min) + min
+    },
+    randomPick: <T>(array: T[]): T => array[Math.floor(Math.random() * array.length)],
+    lerp: (start: number, end: number, progress: number) => start + (end - start) * progress,
+    clamp: (value: number, min: number, max: number) => Math.min(Math.max(value, min), max),
+    round: (value: number, precision = 0) => Math.round(value * Math.pow(10, precision)) / Math.pow(10, precision),
+    roundPad: (value: number, precision: number) => value.toFixed(precision),
+    snap: (value: number, increment: number) => Math.round(value / increment) * increment,
+    wrap: (value: number, min: number, max: number) => ((value - min) % (max - min) + (max - min)) % (max - min) + min,
+    mapRange: (value: number, inMin: number, inMax: number, outMin: number, outMax: number) =>
+      (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin,
+    interpolate: (start: any, end: any, progress: number) => start,
+    padStart: (str: string, length: number, char = ' ') => str.padStart(length, char),
+    padEnd: (str: string, length: number, char = ' ') => str.padEnd(length, char),
+    shuffle: <T>(array: T[]): T[] => [...array].sort(() => Math.random() - 0.5),
+    degToRad: (degrees: number) => degrees * Math.PI / 180,
+    radToDeg: (radians: number) => radians * 180 / Math.PI,
+    sync: (callback: Function) => callback(),
+    createTimekeeper: (params?: TimekeeperParams) => ({
+      time: 0,
+      progress: 0,
+      play: () => ({}),
+      pause: () => ({}),
+      restart: () => ({}),
+    }),
+    $: (selector: string) => {
+      if (typeof window !== 'undefined') {
+        const elements = document.querySelectorAll(selector)
+        return elements.length === 1 ? elements[0] : Array.from(elements)
+      }
+      return null
+    },
+  }
+}
+
 // Individual utility functions as composables
 export function useGet() {
+  const utils = getUtils()
   return (targets: any, property: string) => {
-    const utils = useUtils()
-    return utils?.get(targets, property) || null
+    return utils.get(targets, property)
   }
 }
 
 export function useSet() {
+  const utils = getUtils()
   return (targets: any, property: string, value: any) => {
-    const utils = useUtils()
-    utils?.set(targets, property, value)
+    utils.set(targets, property, value)
   }
 }
 
 export function useRemove() {
+  const utils = getUtils()
   return (targets: any, property: string) => {
-    const utils = useUtils()
-    utils?.remove(targets, property)
+    utils.remove(targets, property)
   }
 }
 
 export function useCleanInlineStyles() {
+  const utils = getUtils()
   return (targets: any) => {
-    const utils = useUtils()
-    utils?.cleanInlineStyles(targets)
+    utils.cleanInlineStyles(targets)
   }
 }
 
 // Math Utils
 export function useRandom() {
+  const utils = getUtils()
   return (min = 0, max = 1) => {
-    const utils = useUtils()
-    return utils?.random(min, max) || Math.random() * (max - min) + min
+    return utils.random(min, max)
   }
 }
 
 export function useRandomPick() {
+  const utils = getUtils()
   return <T>(array: T[]): T => {
-    const utils = useUtils()
-    return utils?.randomPick(array) || array[Math.floor(Math.random() * array.length)]
+    return utils.randomPick(array)
   }
 }
 
 export function useLerp() {
+  const utils = getUtils()
   return (start: number, end: number, progress: number) => {
-    const utils = useUtils()
-    return utils?.lerp(start, end, progress) || start + (end - start) * progress
+    return utils.lerp(start, end, progress)
   }
 }
 
 export function useClamp() {
+  const utils = getUtils()
   return (value: number, min: number, max: number) => {
-    const utils = useUtils()
-    return utils?.clamp(value, min, max) || Math.min(Math.max(value, min), max)
+    return utils.clamp(value, min, max)
   }
 }
 
 export function useRound() {
+  const utils = getUtils()
   return (value: number, precision = 0) => {
-    const utils = useUtils()
-    return utils?.round(value, precision) || Math.round(value * Math.pow(10, precision)) / Math.pow(10, precision)
+    return utils.round(value, precision)
   }
 }
 
 export function useRoundPad() {
+  const utils = getUtils()
   return (value: number, precision: number) => {
-    const utils = useUtils()
-    return utils?.roundPad(value, precision) || value.toFixed(precision)
+    return utils.roundPad(value, precision)
   }
 }
 
 export function useSnap() {
+  const utils = getUtils()
   return (value: number, increment: number) => {
-    const utils = useUtils()
-    return utils?.snap(value, increment) || Math.round(value / increment) * increment
+    return utils.snap(value, increment)
   }
 }
 
 export function useWrap() {
+  const utils = getUtils()
   return (value: number, min: number, max: number) => {
-    const utils = useUtils()
-    return utils?.wrap(value, min, max) || ((value - min) % (max - min) + (max - min)) % (max - min) + min
+    return utils.wrap(value, min, max)
   }
 }
 
 export function useMapRange() {
+  const utils = getUtils()
   return (value: number, inMin: number, inMax: number, outMin: number, outMax: number) => {
-    const utils = useUtils()
-    return utils?.mapRange(value, inMin, inMax, outMin, outMax)
-      || (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin
+    return utils.mapRange(value, inMin, inMax, outMin, outMax)
   }
 }
 
 export function useInterpolate() {
+  const utils = getUtils()
   return (start: any, end: any, progress: number) => {
-    const utils = useUtils()
-    return utils?.interpolate(start, end, progress) || start
+    return utils.interpolate(start, end, progress)
   }
 }
 
 // String Utils
 export function usePadStart() {
+  const utils = getUtils()
   return (str: string, length: number, char = ' ') => {
-    const utils = useUtils()
-    return utils?.padStart(str, length, char) || str.padStart(length, char)
+    return utils.padStart(str, length, char)
   }
 }
 
 export function usePadEnd() {
+  const utils = getUtils()
   return (str: string, length: number, char = ' ') => {
-    const utils = useUtils()
-    return utils?.padEnd(str, length, char) || str.padEnd(length, char)
+    return utils.padEnd(str, length, char)
   }
 }
 
 export function useShuffle() {
+  const utils = getUtils()
   return <T>(array: T[]): T[] => {
-    const utils = useUtils()
-    return utils?.shuffle(array) || [...array].sort(() => Math.random() - 0.5)
+    return utils.shuffle(array)
   }
 }
 
 // Conversion Utils
 export function useDegToRad() {
+  const utils = getUtils()
   return (degrees: number) => {
-    const utils = useUtils()
-    return utils?.degToRad(degrees) || degrees * Math.PI / 180
+    return utils.degToRad(degrees)
   }
 }
 
 export function useRadToDeg() {
+  const utils = getUtils()
   return (radians: number) => {
-    const utils = useUtils()
-    return utils?.radToDeg(radians) || radians * 180 / Math.PI
+    return utils.radToDeg(radians)
   }
 }
 
