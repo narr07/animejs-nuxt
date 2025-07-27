@@ -1,134 +1,96 @@
 <template>
-  <div class="text-demo">
-    <div class="demo-header">
-      <h2 class="demo-title">
-        Animated Text Split
-      </h2>
-      <p class="demo-description">
-        Animate text by splitting into characters with staggered effects.
+  <div class="playground">
+    <section class="split-section">
+      <h2>Chars Split</h2>
+      <p
+        ref="charsEl"
+        class="split-text"
+      >
+        Anime.js text split example for characters.
       </p>
-    </div>
-
-    <p
-      ref="text"
-      class="demo-text"
-    >
-      Anime.js Text Split Example
-    </p>
-    <p
-      ref="text2"
-      class="demo-text"
-    >
-      Another Split Example
-    </p>
-
-    <div class="button-group">
-      <button
-        class="btn"
-        @click="animate"
-      >
-        Animate Style 1
+      <button @click="animateChars">
+        Animate Chars
       </button>
-      <button
-        class="btn"
-        @click="animate2"
+    </section>
+    <section class="split-section">
+      <h2>Words Split</h2>
+      <p
+        ref="wordsEl"
+        class="split-text"
       >
-        Animate Style 2
+        Another text split example using words to animate.
+      </p>
+      <button @click="animateWords">
+        Animate Words
       </button>
-    </div>
-
-    <div class="code-example">
-      <h3 class="section-title">
-        Usage Example
-      </h3>
-      <pre><code>import { useTextSplit } from '~/runtime/composables/useText'
-import { useStagger } from '~/runtime/composables/useStagger'
-
-const text = ref()
-const splitter = useTextSplit(text.value, { type: 'chars' })
-$anime.animate(splitter.chars, { y: [20, 0], opacity: [0, 1], delay: useStagger(30) })</code></pre>
-    </div>
+    </section>
+    <section class="split-section">
+      <h2>Lines Split</h2>
+      <p
+        ref="linesEl"
+        class="split-text"
+      >
+        Finally we split lines to animate line by line with Anime.js.
+      </p>
+      <button @click="animateLines">
+        Animate Lines
+      </button>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
-const text = ref<HTMLElement | null>(null)
-const text2 = ref<HTMLElement | null>(null)
+const charsEl = ref<HTMLElement | null>(null)
+const wordsEl = ref<HTMLElement | null>(null)
+const linesEl = ref<HTMLElement | null>(null)
 const { $anime } = useNuxtApp()
 
-const animate = () => {
-  if (!text.value) return
-  const splitter = useTextSplit(text.value, { type: 'chars' })
+const animateChars = () => {
+  if (!charsEl.value) return
+  const splitter = useTextSplit(charsEl.value, { type: 'chars' })
   if (splitter) {
-    $anime.animate(splitter.chars, { y: [20, 0], opacity: [0, 1], delay: useStagger(30) })
+    $anime.animate(splitter.chars, { y: [20, 0], opacity: [0, 1], delay: $anime.stagger(30) })
   }
 }
 
-const animate2 = () => {
-  if (!text2.value) return
-  const splitter = useTextSplit(text2.value, { type: 'words' })
+const animateWords = () => {
+  if (!wordsEl.value) return
+  const splitter = useTextSplit(wordsEl.value, { type: 'words' })
   if (splitter) {
-    $anime.animate(splitter.words, { y: [-20, 0], opacity: [0, 1], delay: useStagger(40) })
+    $anime.animate(splitter.words, { y: [-10, 0], opacity: [0, 1], delay: $anime.stagger(10) })
+  }
+}
+
+const animateLines = () => {
+  if (!linesEl.value) return
+  const splitter = useTextSplit(linesEl.value, { type: 'lines' })
+  if (splitter) {
+    $anime.animate(splitter.lines, { opacity: [0, 1], translateX: [-40, 0], delay: $anime.stagger(60) })
   }
 }
 </script>
 
 <style scoped>
-.text-demo {
+.playground {
+  padding: 2rem;
   font-family: 'Helvetica Neue', Arial, sans-serif;
-  color: #2c3e50;
-  padding: 1rem;
-  background: #ecf0f1;
-  border-radius: 6px;
 }
-
-.demo-header {
+.split-section {
+  margin-bottom: 2rem;
+}
+.split-text {
+  font-size: 1.2rem;
   margin-bottom: 1rem;
 }
-
-.demo-title {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-}
-
-.demo-description {
-  font-size: 1rem;
-  margin: 0;
-}
-
-.demo-text {
-  margin-bottom: 1rem;
-  font-size: 1rem;
-}
-
-.button-group {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.btn {
+button {
   padding: 0.5rem 1rem;
   border: none;
-  background-color: #3498db;
+  background: #3498db;
   color: white;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 0.9rem;
-  transition: background-color 0.2s;
 }
-
-.btn:hover {
-  background-color: #2980b9;
-}
-
-.code-example {
-  background: #2d3748;
-  border-radius: 8px;
-  padding: 1rem;
-  color: #e2e8f0;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.85rem;
-  overflow-x: auto;
+button:hover {
+  background: #2980b9;
 }
 </style>

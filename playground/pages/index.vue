@@ -12,9 +12,7 @@
       <UseScope />
       <UseStagger />
       <UseSvg />
-      <UseText />
       <UseUtils />
-      <UseDraggable /> 
       <ModuleFeatureExample />
     </div>
   </div>

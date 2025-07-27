@@ -1,5 +1,5 @@
 <template>
   <div>
-    <UseText />
+    <UseDraggable />
   </div>
 </template>
