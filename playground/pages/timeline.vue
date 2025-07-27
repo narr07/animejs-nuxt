@@ -1,5 +1,5 @@
 <template>
   <div>
-    <UseTimeline />
+    <UseTimelineComplex />
   </div>
 </template>

@@ -33,14 +33,14 @@ export interface UseTimelineReturn {
   alternate: () => void
   refresh: () => void
 
-  // Timeline Methods
-  add: (targets: any, params?: AnimationParams, position?: number | string) => void
-  set: (targets: any, params: AnimationParams, position?: number | string) => void
-  call: (callback: Function, position?: number | string) => void
-  label: (name: string, position?: number | string) => void
-  remove: (targets: any) => void
-  sync: (timeline: Timeline) => void
-  init: () => void
+  // Timeline Methods - now chainable
+  add: (targets: any, params?: AnimationParams, position?: number | string) => UseTimelineReturn
+  set: (targets: any, params: AnimationParams, position?: number | string) => UseTimelineReturn
+  call: (callback: Function, position?: number | string) => UseTimelineReturn
+  label: (name: string, position?: number | string) => UseTimelineReturn
+  remove: (targets: any) => UseTimelineReturn
+  sync: (timeline: Timeline) => UseTimelineReturn
+  init: () => UseTimelineReturn
 }
 
 export function useTimeline(
@@ -148,52 +148,6 @@ export function useTimeline(
     }
   }
 
-  // Timeline Methods
-  const add = (targets: any, params?: AnimationParams, position?: number | string) => {
-    if (timeline.value?.add) {
-      timeline.value.add(targets, params, position)
-      updateReactiveValues()
-    }
-  }
-
-  const set = (targets: any, params: AnimationParams, position?: number | string) => {
-    if (timeline.value?.set) {
-      timeline.value.set(targets, params, position)
-      updateReactiveValues()
-    }
-  }
-
-  const call = (callback: Function, position?: number | string) => {
-    if (timeline.value?.call) {
-      timeline.value.call(callback, position)
-    }
-  }
-
-  const label = (name: string, position?: number | string) => {
-    if (timeline.value?.label) {
-      timeline.value.label(name, position)
-    }
-  }
-
-  const remove = (targets: any) => {
-    if (timeline.value?.remove) {
-      timeline.value.remove(targets)
-      updateReactiveValues()
-    }
-  }
-
-  const sync = (tl: Timeline) => {
-    if (timeline.value?.sync) {
-      timeline.value.sync(tl)
-    }
-  }
-
-  const init = () => {
-    if (timeline.value?.init) {
-      timeline.value.init()
-    }
-  }
-
   const updateReactiveValues = () => {
     if (timeline.value) {
       progress.value = timeline.value.progress || 0
@@ -207,12 +161,12 @@ export function useTimeline(
   }
 
   const createTimeline = async () => {
-    if (typeof window === 'undefined')
+    if (typeof window === 'undefined') {
       return
+    }
 
     const nuxtApp = useNuxtApp()
     if (!nuxtApp.$anime || typeof nuxtApp.$anime !== 'object' || !('createTimeline' in nuxtApp.$anime)) {
-      console.warn('createTimeline not available')
       return
     }
 
@@ -278,18 +232,8 @@ export function useTimeline(
     }
   }
 
-  onMounted(async () => {
-    await createTimeline()
-  })
-
-  onUnmounted(() => {
-    if (options.autoCleanup !== false) {
-      cancel()
-      timeline.value = null
-    }
-  })
-
-  return {
+  // Timeline Methods - now chainable
+  const timelineReturn: UseTimelineReturn = {
     timeline,
     isPlaying,
     isFinished,
@@ -310,14 +254,65 @@ export function useTimeline(
     stretch,
     alternate,
     refresh,
-    add,
-    set,
-    call,
-    label,
-    remove,
-    sync,
-    init,
+    add: (targets: any, params?: AnimationParams, position?: number | string) => {
+      if (timeline.value?.add) {
+        timeline.value.add(targets, params, position)
+        updateReactiveValues()
+      }
+      return timelineReturn
+    },
+    set: (targets: any, params: AnimationParams, position?: number | string) => {
+      if (timeline.value?.set) {
+        timeline.value.set(targets, params, position)
+        updateReactiveValues()
+      }
+      return timelineReturn
+    },
+    call: (callback: Function, position?: number | string) => {
+      if (timeline.value?.call) {
+        timeline.value.call(callback, position)
+      }
+      return timelineReturn
+    },
+    label: (name: string, position?: number | string) => {
+      if (timeline.value?.label) {
+        timeline.value.label(name, position)
+      }
+      return timelineReturn
+    },
+    remove: (targets: any) => {
+      if (timeline.value?.remove) {
+        timeline.value.remove(targets)
+        updateReactiveValues()
+      }
+      return timelineReturn
+    },
+    sync: (tl: Timeline) => {
+      if (timeline.value?.sync) {
+        timeline.value.sync(tl)
+      }
+      return timelineReturn
+    },
+    init: () => {
+      if (timeline.value?.init) {
+        timeline.value.init()
+      }
+      return timelineReturn
+    }
   }
+
+  onMounted(async () => {
+    await createTimeline()
+  })
+
+  onUnmounted(() => {
+    if (options.autoCleanup !== false) {
+      cancel()
+      timeline.value = null
+    }
+  })
+
+  return timelineReturn
 }
 
 // Simple timeline creation function (backward compatibility)
@@ -328,7 +323,6 @@ export const createTimelineInstance = (params?: TimelineParams): Timeline | null
 
   const nuxtApp = useNuxtApp()
   if (!nuxtApp.$anime || typeof nuxtApp.$anime !== 'object' || !('createTimeline' in nuxtApp.$anime)) {
-    console.warn('createTimeline not available')
     return null
   }
 
