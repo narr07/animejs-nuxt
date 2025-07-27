@@ -8,11 +8,7 @@
     </header>
     <div class="examples">
       <UseAnimate />
-      <UseTimeline />
-      <UseScope />
-      <UseStagger />
-      <UseSvg />
-      <UseUtils />
+
       <ModuleFeatureExample />
     </div>
   </div>
